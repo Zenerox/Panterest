@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Find all the best pins on earth!'%}
+
+{% block body %}
+    {% if pins|length > 0 %}
+        <h1 class="text-center mb-4">{{ pluralize(pins|length, 'pin', 'pins') }}</h1>
+        <div class="row">
+            {% for pin in pins %}
+                <div class="col-md-4">
+                    <article class="pin bg-white rounded shadow">
+                        <div class="mw-100 overflow-hidden rounded-top">
+                            <a href="{{ path('app_pins_show', {id: pin.id}) }}">
+                                <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpg'))
+                                | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}"
+                                     class="w-100"/>
+                            </a>
+                        </div>
+                        <h2 class="h5 pl-3 pt-3">
+                            <a class="text-secondary text-decoration-none" href="{{ path('app_pins_show', {id: pin.id}) }}">{{ pin.title }}</a>
+                        </h2>
+                        <!--<p>{# {{ pin.description|u.truncate(7, '...', false) #}}}</p>-->
+                        <!-- u permet de manipuler le string,
+                        truncate => tronque le text de 7 caractères,
+                        '...' => quoi afficher après le morceau de texte,
+                        false => indique si les '...' sont compris dans les 7 caractères
+                            ici false dont on a les 7 caractères puis les '...'
+                            si true on aurait eu 4 caractères de la chaîne puis les '...' -->
+                        <p class="pl-3 pb-3 text-muted">
+                            <small>
+                                Submitted by {{ pin.user.fullName }}
+                            </small>
+                        </p>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="h1 mt-5 text-center">No Pin yet. <a href="{{ path('app_pins_create') }}">Be the first</a></p>
+    {% endif %}
+{% endblock %}
