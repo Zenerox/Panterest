@@ -6,6 +6,8 @@ use App\Entity\Pin;
 use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +22,7 @@ class PinsController extends AbstractController
      */
     public function index(PinRepository $pinRepository): Response
     {
+        //$this->denyAccessUnlessGranted('ROLE_ADMIN'); ne sera accessible que si l'utilisateur a le role ROLE_ADMIN
         //dd($pinRepository->findAll()); => die dump : affiche les enregistrements présents en bdd sur la page
         $pins = $pinRepository->findBy([], ["createdAt" => "DESC"]);
         return $this->render('pins/index.html.twig', compact('pins'));
@@ -28,12 +31,14 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/create", name="app_pins_create", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_USER') && user.isVerified()")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
+
         // symfony console debug:autowiring => liste tous les objets qu'on peut injecter
         /* Un formulaire sans 'action' renvoie sur la page en cours, c'est pourquoi on gère ici
             le retour (via la request) du formulaire*/
@@ -84,6 +89,7 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods={"GET", "PUT"})
+     * @IsGranted("PIN_MANAGE", subject="pin")
      * @param Pin $pin
      * @param Request $request
      * @param EntityManagerInterface $em
@@ -91,6 +97,10 @@ class PinsController extends AbstractController
      */
     public function edit(Pin $pin, Request $request, EntityManagerInterface $em): Response
     {
+        /*if($pin->getUser() !== $this->getUser()){
+            throw $this->createAccessDeniedException();
+        }*/
+
         /*$form = $this->createFormBuilder($pin)
             ->setMethod('PUT')
             ->add('title', TextType::class)
@@ -127,6 +137,8 @@ class PinsController extends AbstractController
      */
     public function delete(Pin $pin, Request $request, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted("PIN_MANAGE", $pin);
+
         if($this->isCsrfTokenValid('pin_deletion_'.$pin->getId(),
             $request->get('crsf_token'))) {
             $em->remove($pin);

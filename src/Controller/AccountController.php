@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/account")
  */
+/*
+ * @IsGranted("ROLE_ADMIN") le controller n'est accessible que si on a le role ROLE_ADMIN
+ */
 class AccountController extends AbstractController
 {
     /**
@@ -21,6 +24,7 @@ class AccountController extends AbstractController
      */
     public function show(): Response
     {
+
         return $this->render('account/show.html.twig');
     }
 
@@ -29,6 +33,7 @@ class AccountController extends AbstractController
      */
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
+
         $user = $this->getUser();
         $form = $this->createForm(UserFormType::class,$user);
 
@@ -50,6 +55,7 @@ class AccountController extends AbstractController
     public function changePassword(Request $request, EntityManagerInterface $em,
                                    UserPasswordEncoderInterface $passwordEncoder): Response
     {
+
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordFormType::class, null, [
             "current_password_is_required" => true

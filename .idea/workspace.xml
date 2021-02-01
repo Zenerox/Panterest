@@ -11,10 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b996d952-af48-41b8-af9d-c1bd544738a8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundles/Exception/error404.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PinsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PinsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/LogoutEventSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/LogoutEventSubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pins/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pins/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pins/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pins/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +226,8 @@
       <workItem from="1611143890486" duration="5420000" />
       <workItem from="1611478580678" duration="8901000" />
       <workItem from="1611495093419" duration="5895000" />
-      <workItem from="1611741069793" duration="3493000" />
+      <workItem from="1611741069793" duration="11539000" />
+      <workItem from="1612191093314" duration="5932000" />
     </task>
     <servers />
   </component>
